@@ -69,9 +69,8 @@
                     </div>
                     <div class="form-group">
                         <label for="details">Mô tả sản phẩm</label>
-                        <input type="text" id="details" name="details" required>
+                        <input type="text" id="details" name="details" class="form-control" required>
                     </div>
-                    <button type="submit" class="save-btn">Lưu</button>
                 </div>
 
                 <div class="form-column">
@@ -91,7 +90,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/product'">Thoát</button>
+                </div>
+                <div class="form-column">
+                    <div class="button-wrapper">
+                        <button type="submit" class="save-btn">Lưu</button>
+                        <button type="button" class="exit-btn" onclick="window.location.href='/admin/product'">Thoát</button>
+                    </div>
                 </div>
             </div>
         </form>

@@ -18,6 +18,24 @@
         form.container {
             margin: 0 auto;
         }
+        .custom-textarea {
+            width: 100%;
+            height: 150px; /* Điều chỉnh chiều cao tùy thích */
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            resize: vertical; /* Cho phép điều chỉnh kích thước theo chiều dọc */
+            font-size: 16px;
+            line-height: 1.5;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .custom-textarea:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
     </style>
 </head>
 <body>
@@ -64,9 +82,8 @@
                     </div>
                     <div class="form-group">
                         <label for="details">Mô tả sản phẩm</label>
-                        <input type="text" id="details" name="details" value="{{ $product->details }}" required>
+                        <textarea id="details" name="details" class="form-control custom-textarea" required>{{ $product->details }}</textarea>
                     </div>
-                    <button type="submit" class="save-btn">Lưu</button>
                 </div>
 
                 <div class="form-column">
@@ -88,7 +105,12 @@
                             </select>
                         </div>
                     </div>
-                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/product'">Thoát</button>
+                </div>
+                <div class="form-column">
+                    <div class="button-wrapper">
+                        <button type="submit" class="save-btn">Lưu</button>
+                        <button type="button" class="exit-btn" onclick="window.location.href='/admin/product'">Thoát</button>
+                    </div>
                 </div>
             </div>
         </form>

@@ -34,4 +34,5 @@ Route::get('/admin/product/add', [ProductController::class, "add"]);
 Route::post('/admin/product/save', [ProductController::class,"save"]);
 
 Route::get('/home',[UserIndexController::class,"userindex"]);
-Route::get('/home/details',[DetailsController::class,"detailsindex"]);
+Route::get('/home/details/{id}',[DetailsController::class,"detailsindex"]);
+

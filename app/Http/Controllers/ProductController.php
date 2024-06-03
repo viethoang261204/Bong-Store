@@ -138,10 +138,13 @@ class ProductController extends Controller
         ]);
 
         try {
+            // Chuyển đổi mô tả sản phẩm thành HTML
+            $details = nl2br($request->details);
+
             $data = [
                 'product_id' => $request->product_id,
                 'product_name' => $request->product_name,
-                'details' => $request->details,
+                'details' => $details,
                 'product_price' => $request->product_price,
                 'stock' => $request->stock,
                 'categoryid' => $request->category,
@@ -163,5 +166,6 @@ class ProductController extends Controller
             return redirect()->back()->withErrors(['error' => 'Có lỗi xảy ra, vui lòng thử lại.']);
         }
     }
+
 
 }

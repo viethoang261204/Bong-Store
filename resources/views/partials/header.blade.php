@@ -21,7 +21,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="home" class="nav-item nav-link">Home</a>
+                        <a href="/home" class="nav-item nav-link">Home</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">New Arrivals</a>
                             <div class="dropdown-menu rounded-0 m-0">
