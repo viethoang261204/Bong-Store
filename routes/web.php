@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\DetailsController;
+use App\Http\Controllers\CartController;
 
 Route::get('/admin',[AdminIndexController::class,"adminindex"]);
 
@@ -34,5 +35,8 @@ Route::get('/admin/product/add', [ProductController::class, "add"]);
 Route::post('/admin/product/save', [ProductController::class,"save"]);
 
 Route::get('/home',[UserIndexController::class,"userindex"]);
-Route::get('/home/details/{id}',[DetailsController::class,"detailsindex"]);
+Route::get("/product-detail/{id}", [DetailsController::class, "detailsindex"]);
+
+Route::get("/cart", [CartController::class, "cart"]);
+Route::get("/add-to-cart/{id}/{quantity}", [CartController::class, "addToCart"]);
 

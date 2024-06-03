@@ -22,7 +22,9 @@
     <link href="/t/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/t/css/style.css" rel="stylesheet">
+    <link href="/t/css/style.css" rel="stylesheet">3
+
+    <script src="/t/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -70,18 +72,27 @@
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary btn-minus" >
+                        <button class="btn btn-primary btn-minus">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
-                    <input type="text" class="form-control bg-secondary text-center" value="1">
+                    <input type="text" id="quantity" class="form-control bg-secondary text-center" value="1">
                     <div class="input-group-btn">
                         <button class="btn btn-primary btn-plus">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
                 </div>
-                <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                <a class="btn btn-primary px-3" href="#" id="btnAddToCart" attrId="{{ $obj->id }}"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                <script>
+                    $(function () {
+                        $('#btnAddToCart').click(function () {
+                            let quantity = $('#quantity').val();
+                            let id = $('#btnAddToCart').attr('attrId');
+                            location.href = "/add-to-cart/" + id + "/" + quantity;
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -215,7 +226,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="/home/details/{{ $obj->id }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                        <a href="/product-detail/{{ $obj->id }}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                         <a href="#" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                     </div>
                 </div>
