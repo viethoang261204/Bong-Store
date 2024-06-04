@@ -30,4 +30,50 @@ class CartController extends Controller
 
         return view('user.cart', compact('cart', 'total'));
     }
+
+    public function removeCart($id)
+    {
+        $cart = Session::get('cart', []);
+
+        foreach ($cart as $key => $product) {
+            if ($product->id == $id) {
+                unset($cart[$key]);
+                break;
+            }
+        }
+
+        Session::put('cart', $cart);
+
+        return redirect('/cart');
+    }
+
+    public function clearCart()
+    {
+        Session::forget('cart');
+        return redirect('/cart');
+    }
+
+    public function updateCart($type, $id, $quantity){
+
+        $cart = Session::get('cart');
+
+        foreach ($cart as $key => $value){
+            if($value->id == $id && $type == "plus"){
+                $cart[$key]->quantity = $quantity + 1 ;
+            }
+
+            if ($value->id == $id && $type == "sub"){
+                if($quantity > 1){
+                    $cart[$key]->quantity =$quantity - 1;
+                } else if($quantity == 1 ){
+                    unset($cart[$key]);
+                }
+            }
+        }
+
+        Session::put('cart', $cart);
+        return redirect('/cart');
+    }
 }
+
+

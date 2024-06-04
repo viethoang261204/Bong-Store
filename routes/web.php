@@ -39,4 +39,7 @@ Route::get("/product-detail/{id}", [DetailsController::class, "detailsindex"]);
 
 Route::get("/cart", [CartController::class, "cart"]);
 Route::get("/add-to-cart/{id}/{quantity}", [CartController::class, "addToCart"]);
+Route::get('/cart/remove/{id}', [CartController::class, 'removeCart']);
+Route::get('/cart/clear', [CartController::class, 'clearCart']);
+Route::get("/cart/update/{type}/{id}/{quantity}", [CartController::class, "updateCart"]);
 

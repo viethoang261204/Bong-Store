@@ -63,22 +63,31 @@
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
+                                    <a href="/cart/update/sub/{{$obj->id}}/{{$obj->quantity}}" class="btn btn-sm btn-minus rounded-circle bg-light border" >
                                         <i class="fa fa-minus"></i>
-                                    </button>
+                                    </a>
                                 </div>
                                 <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ $obj->quantity }}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
+                                    <a href="/cart/update/plus/{{$obj->id}}/{{$obj->quantity}}" class="btn btn-sm btn-plus rounded-circle bg-light border">
                                         <i class="fa fa-plus"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </td>
                         <td class="align-middle">{{ $obj->product_price * $obj->quantity }}</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                        <td class="align-middle">
+                            <a href="/cart/remove/{{ $obj->id }}" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a>
+                        </td>
                     </tr>
                 @endforeach
+                @if (count($cart) > 0)
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <a href="/cart/clear" class="btn btn-sm btn-primary"><i class="fa fa-times"></i> Remove Cart</a>
+                        </td>
+                    </tr>
+                @endif
                 </tbody>
             </table>
         </div>
@@ -90,17 +99,17 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
                         <h6 class="font-weight-medium">Subtotal</h6>
-                        <h6 class="font-weight-medium">${{ $total }}</h6>
+                        <h6 class="font-weight-medium">{{ number_format($total, 0, ',', '.') }} VND</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Shipping</h6>
-                        <h6 class="font-weight-medium">$10</h6>
+                        <h6 class="font-weight-medium">20.000 VND</h6>
                     </div>
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
                     <div class="d-flex justify-content-between mt-2">
                         <h5 class="font-weight-bold">Total</h5>
-                        <h5 class="font-weight-bold">${{ $total + 10 }}</h5>
+                        <h5 class="font-weight-bold">{{ number_format($total + 20000, 0, ',', '.') }} VND</h5>
                     </div>
                     <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
                 </div>
