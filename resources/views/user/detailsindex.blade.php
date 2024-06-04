@@ -22,7 +22,7 @@
     <link href="/t/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="/t/css/style.css" rel="stylesheet">3
+    <link href="/t/css/style.css" rel="stylesheet">
 
     <script src="/t/js/jquery.min.js"></script>
 </head>
