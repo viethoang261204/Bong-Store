@@ -17,7 +17,6 @@ Route::get('/admin/category/delete/{id}', [CategoryController::class, "delete"])
 Route::post('/admin/category/update/{id}', [CategoryController::class, "update"]);
 Route::get('/admin/category/edit/{id}', [CategoryController::class, "edit"]);
 Route::get('/admin/category/search',[CategoryController::class,"search"]);
-
 Route::get('/admin/users',[UserController::class,"getAll"]);
 Route::post('/admin/users/toggle-status/{id}', [UserController::class, 'toggleStatus']);
 Route::get('/admin/users/delete/{id}', [UserController::class, 'delete']);
