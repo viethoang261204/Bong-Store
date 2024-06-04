@@ -70,7 +70,7 @@
                         </form>
                         <a href="/cart" class="btn border">
                             <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge">0</span>
+                            <span class="badge">{{ count(Session::get('cart', [])) }}</span>
                         </a>
                         <a href="" class="nav-item nav-link">Login</a>
                     </div>

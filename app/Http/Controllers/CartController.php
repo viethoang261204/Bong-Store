@@ -74,6 +74,10 @@ class CartController extends Controller
         Session::put('cart', $cart);
         return redirect('/cart');
     }
+
+    public function checkout(){
+        return view("user/checkout");
+    }
 }
 
 
