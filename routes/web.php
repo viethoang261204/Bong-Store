@@ -48,3 +48,5 @@ Route::get('/checkout', [CartController::class, "checkout"]);
 Route::post('/cart/checkout', [CartController::class, "cartCheckout"]);
 
 Route::get('/admin/order-list', [AdminOrderController::class, "getAll"]);
+Route::get('/admin/order-list/{status}', [AdminOrderController::class, "filter"]);
+Route::get('/admin/order-update-status/{id}/{status}', [AdminOrderController::class, "ordersUpdateStatus"]);

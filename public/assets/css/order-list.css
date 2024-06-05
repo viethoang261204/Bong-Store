@@ -25,17 +25,23 @@ body {
     margin-bottom: 20px;
 }
 
+.search {
+    position: relative;
+}
+
 .search input {
     padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
     outline: none;
+    width: 200px;
 }
 
 .search ion-icon {
     position: absolute;
-    margin-left: -30px;
-    margin-top: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
     color: #aaa;
 }
 
@@ -45,19 +51,8 @@ body {
     border-radius: 50%;
 }
 
-.content h3 {
+.content h1 {
     margin-bottom: 20px;
-}
-
-.form-control {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100%;
-}
-
-.form-control-sm {
-    font-size: 14px;
 }
 
 .btn {
@@ -98,6 +93,15 @@ body {
     border: 1px solid #ffc107;
     color: #ffc107;
     background-color: #fff;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
 }
 
 .order-status-filter {
@@ -154,34 +158,17 @@ body {
     color: #fff;
 }
 
-/* Other existing styles */
-
-.row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.col-10 {
-    flex: 1;
-}
-
-.col-auto {
-    margin-left: 10px;
+.content h1 {
+    margin-bottom: 20px; /* Thêm khoảng cách dưới cho tiêu đề */
 }
 
 .order-status-filter {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 20px; /* Thêm khoảng cách trên cho các nút */
+    margin-bottom: 20px; /* Thêm khoảng cách dưới cho các nút */
 }
 
-.order-status-filter a {
-    margin-right: 10px;
-    text-decoration: none;
+.order-table th {
+    background-color: #2a2185; /* Màu xanh dương */
+    color: #fff; /* Màu chữ trắng */
 }
 
-/* Adjust button sizes */
-.btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
-}
