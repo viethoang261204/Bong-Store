@@ -42,5 +42,5 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeCart']);
 Route::get('/cart/clear', [CartController::class, 'clearCart']);
 Route::get("/cart/update/{type}/{id}/{quantity}", [CartController::class, "updateCart"]);
 
-Route::get("/checkout", [CartController::class,"checkout"]);
-
+Route::get('/checkout', [CartController::class, "checkout"]);
+Route::post('/cart/checkout', [CartController::class, "cartCheckout"]);

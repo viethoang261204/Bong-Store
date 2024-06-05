@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class CartController extends Controller
 {
@@ -75,9 +76,76 @@ class CartController extends Controller
         return redirect('/cart');
     }
 
-    public function checkout(){
-        return view("user/checkout");
+    public function checkout() {
+
+        $cart = Session::get("cart");
+        if($cart ==null) {
+            $cart = [];
+        }
+
+        $total =0;
+        if(empty($cart)) {
+            return redirect("/cart");
+        }
+
+        foreach ($cart as $index => $obj) {
+            $total += $obj->product_price * $obj->quantity;
+        }
+        return view("user/checkout",[
+            "cart" => $cart,
+            "total" => $total,
+        ]);
     }
+
+    public function cartCheckout(Request $request) {
+
+        $total = $request->total;
+        $status = "PENDING";
+        $fullName = $request->fullName;
+        $address = $request->address;
+        $phone = $request->phone;
+
+        $id = DB::table("orders")
+            ->insertGetId([
+                "full_name" => $fullName,
+                "address" => $address,
+                "phone" => $phone,
+                "total" => $total,
+                "status" => "PENDING",
+                "created_at" => date("Y-m-d H:i:s"),
+            ]);
+
+        // them san pham, quantity, price vao order_detail
+        $cart = Session::get('cart');
+        foreach ($cart as $obj){
+            DB::table("order_details")
+                ->insert([
+                    'orders_id' => $id,
+                    'product_id' => $obj->id,
+                    'price' => $obj->product_price,
+                    'quantity' => $obj->quantity,
+                    "created_at" => date("Y-m-d H:i:s"),
+                ]);
+        }
+
+        // cap nhat so luong san pham trong kho
+//        foreach ($cart as $obj){
+//            DB::table("product")
+//                ->where("id", $obj->id)
+//                ->update([
+//                    "stock" => $obj->stock - $obj->quantity,
+//                ]);
+//        }
+
+        //Xóa giỏ hàng
+        {
+            Session::forget("cart");
+        }
+
+        return view("/user/checkoutsucces",[]);
+    }
+
+
 }
 
 
