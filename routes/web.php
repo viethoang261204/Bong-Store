@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\AdminOrderController;
 
 Route::get('/admin',[AdminIndexController::class,"adminindex"]);
 
@@ -17,6 +18,7 @@ Route::get('/admin/category/delete/{id}', [CategoryController::class, "delete"])
 Route::post('/admin/category/update/{id}', [CategoryController::class, "update"]);
 Route::get('/admin/category/edit/{id}', [CategoryController::class, "edit"]);
 Route::get('/admin/category/search',[CategoryController::class,"search"]);
+
 Route::get('/admin/users',[UserController::class,"getAll"]);
 Route::post('/admin/users/toggle-status/{id}', [UserController::class, 'toggleStatus']);
 Route::get('/admin/users/delete/{id}', [UserController::class, 'delete']);
@@ -44,3 +46,5 @@ Route::get("/cart/update/{type}/{id}/{quantity}", [CartController::class, "updat
 
 Route::get('/checkout', [CartController::class, "checkout"]);
 Route::post('/cart/checkout', [CartController::class, "cartCheckout"]);
+
+Route::get('/admin/order-list', [AdminOrderController::class, "getAll"]);

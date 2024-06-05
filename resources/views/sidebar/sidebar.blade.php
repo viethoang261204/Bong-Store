@@ -43,7 +43,7 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="/admin/order-list">
                 <span class="icon">
                     <ion-icon name="cart-outline"></ion-icon>
                 </span>
