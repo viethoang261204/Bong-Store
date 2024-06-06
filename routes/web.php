@@ -9,6 +9,7 @@ use App\Http\Controllers\UserIndexController;
 use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\ProductShowController;
 
 Route::get('/admin',[AdminIndexController::class,"adminindex"]);
 
@@ -50,3 +51,5 @@ Route::post('/cart/checkout', [CartController::class, "cartCheckout"]);
 Route::get('/admin/order-list', [AdminOrderController::class, "getAll"]);
 Route::get('/admin/order-list/{status}', [AdminOrderController::class, "filter"]);
 Route::get('/admin/order-update-status/{id}/{status}', [AdminOrderController::class, "ordersUpdateStatus"]);
+
+Route::get('/products/category/{categoryName}', [ProductShowController::class, 'showByCategory'])->name('category.show');

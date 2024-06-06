@@ -25,33 +25,32 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">New Arrivals</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="cart" class="dropdown-item">Top</a>
-                                <a href="checkout" class="dropdown-item">Bottom</a>
-                                <a href="checkout" class="dropdown-item">Accessory</a>
+                                <a href="" class="dropdown-item">Top</a>
+                                <a href="" class="dropdown-item">Bottom</a>
+                                <a href="" class="dropdown-item">Accessory</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a>Top</a>
-                                <a href="cart" class="dropdown-item">T Shirt</a>
-                                <a href="checkout" class="dropdown-item">Shirt & Polo</a>
-                                <a href="checkout" class="dropdown-item">Hoodies </a>
-                                <a href="checkout" class="dropdown-item">Jacket</a>
+                                <a href="{{ route('category.show', 'T Shirt') }}" class="dropdown-item">T Shirt</a>
+                                <a href="{{ route('category.show', 'Shirt x Polo') }}" class="dropdown-item">Shirt & Polo</a>
+                                <a href="{{ route('category.show', 'Hoodies') }}" class="dropdown-item">Hoodies</a>
+                                <a href="{{ route('category.show', 'Jacket') }}" class="dropdown-item">Jacket</a>
                                 <a>Bottom</a>
-                                <a href="cart" class="dropdown-item">Pants</a>
-                                <a href="checkout" class="dropdown-item">Shorts</a>
+                                <a href="{{ route('category.show', 'Pants') }}" class="dropdown-item">Pants</a>
+                                <a href="{{ route('category.show', 'Shorts') }}" class="dropdown-item">Shorts</a>
                                 <a>Accessory</a>
-                                <a href="cart" class="dropdown-item">Bag & Backpack</a>
-                                <a href="checkout" class="dropdown-item">Hat</a>
-                                <a href="checkout" class="dropdown-item">Others</a>
+                                <a href="{{ route('category.show', 'Bag & Backpack') }}" class="dropdown-item">Bag & Backpack</a>
+                                <a href="{{ route('category.show', 'Hat') }}" class="dropdown-item">Hat</a>
+                                <a href="{{ route('category.show', 'Others') }}" class="dropdown-item">Others</a>
                             </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Carts</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="cart" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout" class="dropdown-item">Checkout</a>
                             </div>
                         </div>
                         <a href="contact" class="nav-item nav-link">Contact</a>
