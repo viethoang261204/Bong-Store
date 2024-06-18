@@ -11,14 +11,34 @@ class CartController extends Controller
 {
     public function addToCart($id, $quantity)
     {
+        // Kiểm tra nếu số lượng nhỏ hơn hoặc bằng 0
+        if ($quantity <= 0) {
+            return redirect('/product-detail/' . $id)->with('error', 'Quantity must be greater than 0.');
+        }
+
+        // Lấy sản phẩm từ cơ sở dữ liệu
         $product = DB::table('product')
             ->where('id', $id)
             ->first();
-        $product->quantity = $quantity;
-        $cart = $product;
-        Session::push("cart", $cart);
-        return redirect('/product-detail/'.$id);
+
+        // Kiểm tra nếu sản phẩm tồn tại và số lượng tồn kho đủ
+        if ($product) {
+            if ($product->stock < $quantity) {
+                return redirect('/product-detail/' . $id)->with('error', 'Not enough stock available.');
+            }
+
+            $product->quantity = $quantity;
+            $cart = $product;
+            // Thêm sản phẩm vào session giỏ hàng
+            Session::push("cart", $cart);
+        } else {
+            return redirect('/product-detail/' . $id)->with('error', 'Product not found.');
+        }
+
+        return redirect('/product-detail/' . $id);
     }
+
+
 
     public function cart()
     {
@@ -97,8 +117,8 @@ class CartController extends Controller
         ]);
     }
 
-    public function cartCheckout(Request $request) {
-
+    public function cartCheckout(Request $request)
+    {
         $total = $request->total;
         $status = "PENDING";
         $fullName = $request->fullName;
@@ -115,9 +135,9 @@ class CartController extends Controller
                 "created_at" => date("Y-m-d H:i:s"),
             ]);
 
-        // them san pham, quantity, price vao order_detail
         $cart = Session::get('cart');
-        foreach ($cart as $obj){
+        foreach ($cart as $obj) {
+            // Thêm sản phẩm vào order_details
             DB::table("order_details")
                 ->insert([
                     'orders_id' => $id,
@@ -126,24 +146,19 @@ class CartController extends Controller
                     'quantity' => $obj->quantity,
                     "created_at" => date("Y-m-d H:i:s"),
                 ]);
+
+            // Cập nhật số lượng tồn kho
+            DB::table("product")
+                ->where("id", $obj->id)
+                ->decrement("stock", $obj->quantity);
         }
 
-        // cap nhat so luong san pham trong kho
-//        foreach ($cart as $obj){
-//            DB::table("product")
-//                ->where("id", $obj->id)
-//                ->update([
-//                    "stock" => $obj->stock - $obj->quantity,
-//                ]);
-//        }
+        // Xóa giỏ hàng
+        Session::forget("cart");
 
-        //Xóa giỏ hàng
-        {
-            Session::forget("cart");
-        }
-
-        return view("/user/checkoutsucces",[]);
+        return view("/user/checkoutsucces", []);
     }
+
 
 
 }

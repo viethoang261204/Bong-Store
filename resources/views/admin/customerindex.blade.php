@@ -86,30 +86,30 @@
             </div>
         </div>
 
-        <h1 class="dm">Quản lý người dùng</h1>
+        <h1 class="dm">Quản lý khách hàng</h1>
         <div class="category-table">
             <table>
                 <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Tên người dùng</th>
+                    <th>Tên khách hàng</th>
                     <th>Email</th>
                     <th>Ngày tạo</th>
                     <th>Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $obj)
+                @foreach($customers as $obj)
                     <tr>
                         <td>{{$obj -> id}}</td>
                         <td>{{$obj -> full_name}}</td>
                         <td>{{$obj -> email}}</td>
                         <td>{{$obj -> created_at}}</td>
                         <td>
-                            <a href="/admin/users/edit/{{$obj->id}}" class="edit-btn">
+                            <a href="/admin/customers/edit/{{$obj->id}}" class="edit-btn">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="/admin/users/delete/{{$obj->id}}" class="delete-btn" data-id="{{$obj->id}}" >
+                            <a href="/admin/customers/delete/{{$obj->id}}" class="delete-btn" data-id="{{$obj->id}}" >
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
@@ -117,8 +117,8 @@
                 @endforeach
                 </tbody>
             </table>
-            <a id="btn-open" href="/admin/users/add" style="text-decoration: none" >
-                Thêm người dùng
+            <a id="btn-open" href="/admin/customers/add" style="text-decoration: none" >
+                Thêm khách hàng
             </a>
         </div>
     </div>
@@ -161,7 +161,7 @@
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location.href = `/admin/users/delete/${usersId}`;
+                        window.location.href = `/admin/customers/delete/${usersId}`;
                     }
                 });
         });
@@ -170,3 +170,4 @@
 </script>
 </body>
 </html>
+

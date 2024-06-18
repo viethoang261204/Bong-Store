@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm người dùng</title>
+    <title>Chỉnh sửa khách hàng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
@@ -17,21 +17,6 @@
         }
         form.container {
             margin: 0 auto;
-        }
-        .avatar {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-        .password-container {
-            position: relative;
-        }
-        .toggle-password {
-            position: absolute;
-            top: 70%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
         }
     </style>
 </head>
@@ -56,50 +41,40 @@
             </div>
         </div>
 
-        <h1 class="dm">Thêm người dùng</h1>
-        <form action="/admin/users/save" method="post" enctype="multipart/form-data" class="container my-5 py-4 border rounded shadow" style="max-width: 900px;" onsubmit="return validateForm()">
+        <h1 class="dm">Quản lý khách hàng</h1>
+        <form action="/admin/customers/update/{{ $customer->id }}" method="post" enctype="multipart/form-data" class="container my-5 py-4 border rounded shadow" style="max-width: 900px;">
             @csrf
             <div class="form-container">
                 <div class="form-column left">
                     <div class="avatar-wrapper">
-                        <img id="avatar" src="/assets/imgs/default1.jpg" alt="Avatar" class="avatar">
+                        <img id="avatar" src="/assets/imgs/{{$customer->image}}" alt="Avatar" class="avatar">
                     </div>
-                    <button class="edit-avatar-btn" type="button" onclick="document.getElementById('edit-avatar-input').click()">Thêm ảnh người dùng</button>
+                    <button class="edit-avatar-btn" type="button" onclick="document.getElementById('edit-avatar-input').click()">Chỉnh sửa ảnh đại diện</button>
                     <input type="file" id="edit-avatar-input" class="edit-avatar-input" name="image" accept="image/*" style="display: none;" onchange="loadFile(event)">
                 </div>
 
                 <div class="form-column">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group password-container">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" id="password" name="password" required>
-                        <i class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                        <input type="email" id="email" name="email" value="{{ $customer->email }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="address">Địa chỉ</label>
-                        <input type="text" id="address" name="address" required>
+                        <label for="full_name">Tên đầy đủ</label>
+                        <input type="text" id="full_name" name="full_name" value="{{ $customer->full_name }}" required>
                     </div>
                     <button type="submit" class="save-btn">Lưu</button>
                 </div>
 
                 <div class="form-column">
                     <div class="form-group">
-                        <label for="full_name">Tên đầy đủ</label>
-                        <input type="text" id="full_name" name="full_name" required>
-                    </div>
-                    <div class="form-group password-container">
-                        <label for="confirm_password">Nhập lại mật khẩu</label>
-                        <input type="password" id="confirm_password" name="password_confirmation" required>
-                        <i class="fas fa-eye toggle-password" onclick="togglePassword('confirm_password')"></i>
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" id="address" name="address" value="{{ $customer->address }}" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">Số điện thoại</label>
-                        <input type="number" id="phone" name="phone" required>
+                        <input type="text" id="phone" name="phone" value="{{ $customer->phone }}" required>
                     </div>
-                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/users'">Thoát</button>
+                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/customers'">Thoát</button>
                 </div>
             </div>
         </form>
@@ -120,27 +95,9 @@
         output.onload = function() {
             URL.revokeObjectURL(output.src) // free memory
         }
-    }
-
-    function togglePassword(id) {
-        var input = document.getElementById(id);
-        if (input.type === "password") {
-            input.type = "text";
-        } else {
-            input.type = "password";
-        }
-    }
-
-    function validateForm() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirm_password").value;
-
-        if (password !== confirmPassword) {
-            alert("Mật khẩu và nhập lại mật khẩu không khớp!");
-            return false;
-        }
-        return true;
+        document.getElementById('avatar-form').submit();
     }
 </script>
 </body>
 </html>
+

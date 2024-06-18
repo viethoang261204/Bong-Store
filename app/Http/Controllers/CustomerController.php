@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
+class CustomerController extends Controller
 {
     public function getAll()
     {
-        $path = "admin/users";
-        $users = DB::table("users")->paginate(5);
+        $path = "admin/customers";
+        $customers = DB::table("customers")->paginate(5);
         Paginator::useBootstrap();
-        return view("/admin/userindex", [
+        return view("/admin/customerindex", [
             "path" => $path,
-            "users" => $users
+            "customers" => $customers
         ]);
     }
 
     public function delete($id){
-        DB::table("users")
+        DB::table("customers")
             ->where("id", $id)
             ->delete();
-        return redirect("/admin/users");
+        return redirect("/admin/customers");
     }
 
     public function edit($id)
     {
-        $user = DB::table('users')->where('id', $id)->first();
-        return view('admin.useredit', compact('user'));
+        $customer = DB::table('customers')->where('id', $id)->first();
+        return view('admin.customeredit', compact('customer'));
     }
 
     public function update(Request $request, $id)
@@ -50,7 +49,7 @@ class UserController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('assets/imgs'), $imageName);
 
-            $oldImage = DB::table('users')->where('id', $id)->value('image');
+            $oldImage = DB::table('customers')->where('id', $id)->value('image');
             if ($oldImage && file_exists(public_path('assets/imgs/' . $oldImage))) {
                 unlink(public_path('assets/imgs/' . $oldImage));
             }
@@ -58,14 +57,14 @@ class UserController extends Controller
             $data['image'] = $imageName;
         }
 
-        DB::table('users')->where('id', $id)->update($data);
+        DB::table('customers')->where('id', $id)->update($data);
 
-        return redirect('/admin/users')->with('success', 'User updated successfully');
+        return redirect('/admin/customers')->with('success', 'Customer updated successfully');
     }
 
     public function add()
     {
-        return view("admin.useradd");
+        return view("admin.customeradd");
     }
 
     public function save(Request $request)
@@ -107,14 +106,13 @@ class UserController extends Controller
                 $data['image'] = $imageName;
             }
 
-            DB::table('users')->insert($data);
+            DB::table('customers')->insert($data);
 
-            return redirect('admin/users')->with('success', 'Thêm người dùng thành công!');
+            return redirect('admin/customers')->with('success', 'Thêm khác hàng thành công!');
         } catch (\Exception $e) {
-            \Log::error('Thêm người dùng thất bại: ', ['error' => $e->getMessage()]);
+            \Log::error('Thêm khách hàng thất bại: ', ['error' => $e->getMessage()]);
 
             return redirect()->back()->withErrors(['error' => 'Có lỗi xảy ra, vui lòng thử lại.']);
         }
     }
-
 }

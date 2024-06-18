@@ -51,7 +51,7 @@
                     <tr>
                         <td>{{$obj -> id}}</td>
                         <td>{{$obj -> category_name}}</td>
-                        <td>0</td>
+                        <td>{{ $obj->products_count }}</td>
                         <td>
                             <a href="/admin/category/edit/{{$obj->id}}" class="edit-btn">
                                 <i class="fas fa-edit"></i>

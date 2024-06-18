@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thêm người dùng</title>
+    <title>Thêm khách hàng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
@@ -56,8 +56,8 @@
             </div>
         </div>
 
-        <h1 class="dm">Thêm người dùng</h1>
-        <form action="/admin/users/save" method="post" enctype="multipart/form-data" class="container my-5 py-4 border rounded shadow" style="max-width: 900px;" onsubmit="return validateForm()">
+        <h1 class="dm">Thêm khách hàng</h1>
+        <form action="/admin/customers/save" method="post" enctype="multipart/form-data" class="container my-5 py-4 border rounded shadow" style="max-width: 900px;" onsubmit="return validateForm()">
             @csrf
             <div class="form-container">
                 <div class="form-column left">
@@ -99,7 +99,7 @@
                         <label for="phone">Số điện thoại</label>
                         <input type="number" id="phone" name="phone" required>
                     </div>
-                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/users'">Thoát</button>
+                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/customers'">Thoát</button>
                 </div>
             </div>
         </form>
@@ -144,3 +144,4 @@
 </script>
 </body>
 </html>
+

@@ -12,11 +12,17 @@ class CategoryController extends Controller
     public function getAll()
     {
         $path = "admin/category";
-        $categories = DB::table("category")->paginate(5);
+        $categories = DB::table('category')
+            ->leftJoin('product', 'category.id', '=', 'product.categoryid')
+            ->select('category.*', DB::raw('COUNT(product.id) as products_count'))
+            ->groupBy('category.id', 'category.category_name') // thêm tất cả các trường trong bảng category
+            ->paginate(5);
+
         Paginator::useBootstrap();
-        return view("/admin.categoryindex", [
-            "path" => $path,
-            "categories" => $categories
+
+        return view('admin.categoryindex', [
+            'path' => $path,
+            'categories' => $categories
         ]);
     }
 

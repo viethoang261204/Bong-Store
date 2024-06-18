@@ -10,6 +10,7 @@ use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\ProductShowController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/admin',[AdminIndexController::class,"adminindex"]);
 
@@ -21,13 +22,20 @@ Route::get('/admin/category/edit/{id}', [CategoryController::class, "edit"]);
 Route::get('/admin/category/search',[CategoryController::class,"search"]);
 
 Route::get('/admin/users',[UserController::class,"getAll"]);
-Route::post('/admin/users/toggle-status/{id}', [UserController::class, 'toggleStatus']);
 Route::get('/admin/users/delete/{id}', [UserController::class, 'delete']);
 Route::get('/admin/users/edit/{id}',[UserController::class,'edit']);
 Route::post('/admin/users/update/{id}', [UserController::class, "update"]);
 Route::post('/update-avatar', [UserController::class, 'updateAvatar'])->name('update-avatar');
 Route::get('/admin/users/add', [UserController::class, "add"]);
 Route::post('/admin/users/save', [UserController::class,"save"]);
+
+Route::get('/admin/customers',[CustomerController::class,"getAll"]);
+Route::get('/admin/customers/delete/{id}', [CustomerController::class, 'delete']);
+Route::get('/admin/customers/edit/{id}',[CustomerController::class,'edit']);
+Route::post('/admin/customers/update/{id}', [CustomerController::class, "update"]);
+Route::post('/update-avatar', [CustomerController::class, 'updateAvatar'])->name('update-avatar');
+Route::get('/admin/customers/add', [CustomerController::class, "add"]);
+Route::post('/admin/customers/save', [CustomerController::class,"save"]);
 
 Route::get('/admin/product',[ProductController::class,"getAll"]);
 Route::get('/admin/product/delete/{id}', [ProductController::class, "delete"]);

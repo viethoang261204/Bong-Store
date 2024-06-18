@@ -36,7 +36,6 @@
                                 <a>Top</a>
                                 <a href="{{ route('category.show', 'T Shirt') }}" class="dropdown-item">T Shirt</a>
                                 <a href="{{ route('category.show', 'Shirt x Polo') }}" class="dropdown-item">Shirt & Polo</a>
-                                <a href="{{ route('category.show', 'Hoodies') }}" class="dropdown-item">Hoodies</a>
                                 <a href="{{ route('category.show', 'Jacket') }}" class="dropdown-item">Jacket</a>
                                 <a>Bottom</a>
                                 <a href="{{ route('category.show', 'Pants') }}" class="dropdown-item">Pants</a>

@@ -62,13 +62,6 @@
                         <label for="full_name">Tên đầy đủ</label>
                         <input type="text" id="full_name" name="full_name" value="{{ $user->full_name }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="role">Vai trò</label>
-                        <select id="role" name="role" required>
-                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="customer" {{ $user->role == 'customer' ? 'selected' : '' }}>Customer</option>
-                        </select>
-                    </div>
                     <button type="submit" class="save-btn">Lưu</button>
                 </div>
 
@@ -80,13 +73,6 @@
                     <div class="form-group">
                         <label for="phone">Số điện thoại</label>
                         <input type="text" id="phone" name="phone" value="{{ $user->phone }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Tình trạng</label>
-                        <select id="status" name="status" required>
-                            <option value="active" {{ $user->status == 'active' ? 'selected' : '' }}>Active</option>
-                            <option value="inactive" {{ $user->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                        </select>
                     </div>
                     <button type="button" class="exit-btn" onclick="window.location.href='/admin/users'">Thoát</button>
                 </div>
