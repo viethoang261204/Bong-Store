@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\KhachDaDangNhap;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminIndexController;
 use App\Http\Controllers\CategoryController;
@@ -66,3 +67,10 @@ Route::get('/products/category/{categoryName}', [ProductShowController::class, '
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::middleware([KhachDaDangNhap::class])->group(function(){
+    Route::get('/signup',[CustomerController::class, 'signUp'])->name('user.account.signup');
+    Route::post('/signup',[CustomerController::class,'signupProcess'])->name('user.account.signupProcess');
+
+    Route::get('/signin',[CustomerController::class,'signIn'])->name('user.account.signin');
+    Route::post('/signin',[CustomerController::class,'signinProcess'])->name('user.account.signinProcess');
+});
