@@ -8,6 +8,73 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    public function signUp()
+    {
+        return view('user.account.signup');
+    }
+
+    public function signupProcess(CustomerStoreRequest $request)
+    {
+        if ($request->validated()) {
+            $array = [];
+            $array = Arr::add($array, 'name', $request->full_name);
+            $array = Arr::add($array, 'email', $request->email);
+            $array = Arr::add($array, 'password', Hash::make($request->password));
+            $array = Arr::add($array, 'phone', $request->phone);
+            $array = Arr::add($array, 'address', $request->address);
+
+            //Lấy dữ liệu từ form và lưu lên db
+            Customer::create($array);
+
+            return Redirect::route('user.userindex');
+        } else {
+            //cho quay về trang login
+            return Redirect::back('user.account.signin');
+        }
+    }
+
+    public function signin()
+    {
+        session([
+            'myUrl' => url()->previous()
+        ]);
+        return view('user.account.signin');
+    }
+    
+    public function signinProcess(Request $request)
+    {
+        $accuracy = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6'],
+        ]);
+
+        $account = $request->only(['email', 'password']);
+        $check = Auth::guard('customer')->attempt($account);
+
+        if ($check) {
+            //Lấy thông tin của customer đang login
+            $customer = Auth::guard('customer')->user();
+            //Cho login
+            Auth::guard('customer')->login($customer);
+            //Ném thông tin customer đăng nhập lên session
+            session(['customer' => $customer]);
+            return Redirect::route('user.userindex')->with('success', 'Logged in successfully');
+        } else {
+            //cho quay về trang login
+            return Redirect::back()->with('failed', 'You entered the wrong email or password.')->withInput($request->input());
+        }
+    }
+
+    public function signOut()
+    {
+        if (!Auth::guard('customer')->check()) {
+            return Redirect::route('user.userindex')->with('success', 'Logged out successfully !');
+        }
+        Auth::guard('customer')->logout();
+        session()->forget('customer');
+        return view('user.userindex');
+    }
+    
     public function getAll()
     {
         $path = "admin/customers";
