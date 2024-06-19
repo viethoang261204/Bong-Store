@@ -3,9 +3,9 @@
         <!-- Logo -->
         <div class="col-lg-3 d-none d-lg-block">
             <a href="" class="text-decoration-none">
-                <h1 class="m-0 display-5 font-weight-semi-bold">
+                <a href="/home" class="m-0 display-5 font-weight-semi-bold">
                     <img class="img-fluid w-50" src="/t/img/logo.png" alt="">
-                </h1>
+                </a>
             </a>
         </div>
         <!-- Navbar -->
@@ -22,14 +22,6 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="/home" class="nav-item nav-link">Home</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">New Arrivals</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="" class="dropdown-item">Top</a>
-                                <a href="" class="dropdown-item">Bottom</a>
-                                <a href="" class="dropdown-item">Accessory</a>
-                            </div>
-                        </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products</a>
                             <div class="dropdown-menu rounded-0 m-0">
@@ -52,7 +44,7 @@
                                 <a href="cart" class="dropdown-item">Shopping Cart</a>
                             </div>
                         </div>
-                        <a href="contact" class="nav-item nav-link">Contact</a>
+                        <a href="/contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <!-- Search and Login -->
                     <div class="d-flex align-items-center">

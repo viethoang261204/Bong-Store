@@ -104,26 +104,26 @@
     <div class="row px-xl-5 pb-3">
         <div class="col-lg-4 col-md-6 pb-1">
             <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                <a href="{{ route('category.show', 'T Shirt') }}" class="cat-img position-relative overflow-hidden mb-3">
                     <img class="img-fluid" src="t/img/brand3.jpg" alt="">
                 </a>
-                <h5 class="font-weight-semi-bold m-0">Top</h5>
+                <h5 class="font-weight-semi-bold m-0">T Shirt</h5>
             </div>
         </div>
         <div class="col-lg-4 col-md-6 pb-1">
             <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                <a href="{{ route('category.show', 'Shorts') }}" class="cat-img position-relative overflow-hidden mb-3">
                     <img class="img-fluid" src="t/img/brand4.jpg" alt="">
                 </a>
-                <h5 class="font-weight-semi-bold m-0">Bottom</h5>
+                <h5 class="font-weight-semi-bold m-0">Shorts</h5>
             </div>
         </div>
         <div class="col-lg-4 col-md-6 pb-1">
             <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                <a href="{{ route('category.show', 'Bag & Backpack') }}" class="cat-img position-relative overflow-hidden mb-3">
                     <img class="img-fluid" src="t/img/brand5.jpg" alt="">
                 </a>
-                <h5 class="font-weight-semi-bold m-0">Accessory</h5>
+                <h5 class="font-weight-semi-bold m-0">Bag & Backpack</h5>
             </div>
         </div>
     </div>
@@ -139,7 +139,6 @@
                 <img src="t/img/brand6.png" alt="">
                 <div class="position-relative" style="z-index: 1;">
                     <h1 class="mb-4 font-weight-semi-bold">Top Collection</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -148,7 +147,6 @@
                 <img src="t/img/brand7.png" alt="">
                 <div class="position-relative" style="z-index: 1;">
                     <h1 class="mb-4 font-weight-semi-bold">Bottom Collection</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -194,14 +192,12 @@
                 <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
                 <p>Hãy để lại thông tin của bạn để nhận đuợc tư vấn miễn phí từ chúng tôi</p>
             </div>
-            <form action="">
-                <div class="input-group">
-                    <input type="text" class="form-control border-white p-4" placeholder="Email Goes Here">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary px-4">Subscribe</button>
-                    </div>
+            <form action="/contact" method="GET">
+                <div class="text-center">
+                    <button class="btn btn-primary px-4" type="submit">Subscribe</button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

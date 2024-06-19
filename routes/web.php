@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\ProductShowController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/admin',[AdminIndexController::class,"adminindex"]);
 
@@ -61,3 +62,7 @@ Route::get('/admin/order-list/{status}', [AdminOrderController::class, "filter"]
 Route::get('/admin/order-update-status/{id}/{status}', [AdminOrderController::class, "ordersUpdateStatus"]);
 
 Route::get('/products/category/{categoryName}', [ProductShowController::class, 'showByCategory'])->name('category.show');
+
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+

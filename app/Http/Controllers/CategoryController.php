@@ -14,8 +14,8 @@ class CategoryController extends Controller
         $path = "admin/category";
         $categories = DB::table('category')
             ->leftJoin('product', 'category.id', '=', 'product.categoryid')
-            ->select('category.*', DB::raw('COUNT(product.id) as products_count'))
-            ->groupBy('category.id', 'category.category_name') // thêm tất cả các trường trong bảng category
+            ->select('category.id', 'category.category_name', DB::raw('COUNT(product.id) as products_count'))
+            ->groupBy('category.id', 'category.category_name')
             ->paginate(5);
 
         Paginator::useBootstrap();
@@ -98,13 +98,18 @@ class CategoryController extends Controller
     {
         $searchTerm = $request->input('search');
         $categories = DB::table('category')
-            ->where('category_name', 'LIKE', '%' . $searchTerm . '%')
+            ->leftJoin('product', 'category.id', '=', 'product.categoryid')
+            ->select('category.id', 'category.category_name', DB::raw('COUNT(product.id) as products_count'))
+            ->where('category.category_name', 'LIKE', '%' . $searchTerm . '%')
+            ->groupBy('category.id', 'category.category_name')
             ->paginate(5);
-        return view('admin/categoryindex', [
+
+        return view('admin.categoryindex', [
             'categories' => $categories,
             'searchTerm' => $searchTerm
         ]);
     }
+
 
 }
 
