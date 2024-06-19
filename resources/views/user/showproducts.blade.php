@@ -44,59 +44,11 @@
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
-        <!-- Shop Sidebar Start -->
-        <div class="col-lg-3 col-md-12">
-            <!-- Price Start -->
-            <div class="border-bottom mb-4 pb-4">
-                <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-                <form id="price-filter-form">
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="price-all" data-min="0" data-max="600">
-                        <label class="custom-control-label" for="price-all">All Price</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-1" data-min="0" data-max="100000">
-                        <label class="custom-control-label" for="price-1">0 - 100k VND</label>
-                        <span class="badge border font-weight-normal">150</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-2" data-min="100000" data-max="200000">
-                        <label class="custom-control-label" for="price-2">100k - 200k VND</label>
-                        <span class="badge border font-weight-normal">295</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-3" data-min="200000" data-max="300000">
-                        <label class="custom-control-label" for="price-3">200k - 300k VND</label>
-                        <span class="badge border font-weight-normal">246</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-4" data-min="300000" data-max="400000">
-                        <label class="custom-control-label" for="price-4">300k - 400k VND</label>
-                        <span class="badge border font-weight-normal">145</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-5" data-min="400000" data-max="500000">
-                        <label class="custom-control-label" for="price-5">400k - 500k VND</label>
-                        <span class="badge border font-weight-normal">168</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="price-6" data-min="500000" data-max="600000">
-                        <label class="custom-control-label" for="price-6">500k - 600k VND</label>
-                        <span class="badge border font-weight-normal">120</span>
-                    </div>
-                    <!-- Filter Button -->
-                    <button type="button" class="btn btn-primary mt-3" id="filter-button">Filter</button>
-                </form>
-            </div>
-        </div>
-        <!-- Shop Sidebar End -->
-
         <!-- Shop Product Start -->
         <div class="col-lg-9 col-md-12">
-            <div class="row pb-3">
+            <div class="row pb-3 product-list">
                 @foreach($products as $product)
-                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1 product-item">
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1 product-item" data-price="{{ $product->product_price }}">
                         <div class="card border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 <img class="img-fluid w-100" src="/assets/imgs/{{ $product->image}}" alt="">
@@ -138,30 +90,6 @@
 <!-- Template Javascript -->
 <script src="/t/js/main.js"></script>
 
-<script>
-    document.getElementById('filter-button').addEventListener('click', function() {
-        // Lấy tất cả các checkbox
-        const checkboxes = document.querySelectorAll('#price-filter-form input[type=checkbox]:checked');
-
-        // Duyệt qua từng checkbox và lấy giá trị min và max
-        let filters = [];
-        checkboxes.forEach(function(checkbox) {
-            filters.push({min: parseInt(checkbox.dataset.min), max: parseInt(checkbox.dataset.max)});
-        });
-
-        // Lọc sản phẩm
-        let filteredProducts = products.filter(product => {
-            return filters.some(filter => product.product_price >= filter.min && product.product_price <= filter.max);
-        });
-
-        // Cập nhật DOM
-        const productsContainer = document.querySelector('.row.pb-3');
-        productsContainer.innerHTML = ''; // Xóa các sản phẩm hiện tại
-        filteredProducts.forEach(product => {
-            productsContainer.innerHTML += `...`; // Các bạn sẽ cần thêm code để tạo thẻ HTML cho từng sản phẩm
-        });
-    });
-</script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@
         <li>
             <a href="/admin/users">
                 <span class="icon">
-                    <ion-icon name="people-outline"></ion-icon>
+                    <ion-icon name="person-outline"></ion-icon>
                 </span>
                 <span class="title">Người dùng</span>
             </a>
