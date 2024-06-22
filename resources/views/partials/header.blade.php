@@ -41,7 +41,7 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Carts</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="cart" class="dropdown-item">Shopping Cart</a>
+                                <a href="/cart" class="dropdown-item">Shopping Cart</a>
                             </div>
                         </div>
                         <a href="/contact" class="nav-item nav-link">Contact</a>
@@ -58,11 +58,24 @@
                                 </div>
                             </div>
                         </form>
+                        @if (Auth::check())
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    {{ Auth::user()->full_name }}
+                                </a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="/order-history" class="dropdown-item">Orders History</a>
+                                    <a href="/sign-out" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
+                        @else
+                            <a href="/sign-in" class="nav-item nav-link">Login</a>
+                        @endif
+
                         <a href="/cart" class="btn border">
                             <i class="fas fa-shopping-cart text-primary"></i>
                             <span class="badge">{{ count(Session::get('cart', [])) }}</span>
                         </a>
-                        <a href="" class="nav-item nav-link">Login</a>
                     </div>
                 </div>
             </nav>

@@ -36,8 +36,13 @@
                 </label>
             </div>
 
-            <div class="user">
-                <img src="/assets/imgs/customer01.jpg" alt="">
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    {{ Auth::user()->full_name }}
+                </a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="/sign-out" class="dropdown-item">Logout</a>
+                </div>
             </div>
         </div>
 
@@ -62,7 +67,15 @@
                         <label for="full_name">Tên đầy đủ</label>
                         <input type="text" id="full_name" name="full_name" value="{{ $user->full_name }}" required>
                     </div>
+                    <div class="form-group">
+                        <label for="role">Vai trò</label>
+                        <select id="role" name="role" required>
+                            <option value="customer" {{ $user->role == 'customer' ? 'selected' : '' }}>Khách hàng</option>
+                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Quản trị viên</option>
+                        </select>
+                    </div>
                     <button type="submit" class="save-btn">Lưu</button>
+                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/users'">Thoát</button>
                 </div>
 
                 <div class="form-column">
@@ -74,7 +87,6 @@
                         <label for="phone">Số điện thoại</label>
                         <input type="text" id="phone" name="phone" value="{{ $user->phone }}" required>
                     </div>
-                    <button type="button" class="exit-btn" onclick="window.location.href='/admin/users'">Thoát</button>
                 </div>
             </div>
         </form>
@@ -84,6 +96,10 @@
 <!-- =========== Scripts =========  -->
 <script src="/assets/js/main.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

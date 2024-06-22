@@ -11,6 +11,7 @@ class CategoryController extends Controller
 {
     public function getAll()
     {
+        $user = auth()->user();
         $path = "admin/category";
         $categories = DB::table('category')
             ->leftJoin('product', 'category.id', '=', 'product.categoryid')
@@ -22,7 +23,8 @@ class CategoryController extends Controller
 
         return view('admin.categoryindex', [
             'path' => $path,
-            'categories' => $categories
+            'categories' => $categories,
+            'user' => $user
         ]);
     }
 

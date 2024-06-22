@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\KhachDaDangNhap;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminIndexController;
 use App\Http\Controllers\CategoryController;
@@ -11,10 +10,11 @@ use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\ProductShowController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StaticsController;
 
-Route::get('/admin',[AdminIndexController::class,"adminindex"]);
+Route::get('/admin', 'App\Http\Controllers\AdminIndexController@adminindex')->middleware('auth');
 
 Route::get('/admin/category',[CategoryController::class,"getAll"]);
 Route::post('/admin/category/save', [CategoryController::class, "save"]);
@@ -30,14 +30,6 @@ Route::post('/admin/users/update/{id}', [UserController::class, "update"]);
 Route::post('/update-avatar', [UserController::class, 'updateAvatar'])->name('update-avatar');
 Route::get('/admin/users/add', [UserController::class, "add"]);
 Route::post('/admin/users/save', [UserController::class,"save"]);
-
-Route::get('/admin/customers',[CustomerController::class,"getAll"]);
-Route::get('/admin/customers/delete/{id}', [CustomerController::class, 'delete']);
-Route::get('/admin/customers/edit/{id}',[CustomerController::class,'edit']);
-Route::post('/admin/customers/update/{id}', [CustomerController::class, "update"]);
-Route::post('/update-avatar', [CustomerController::class, 'updateAvatar'])->name('update-avatar');
-Route::get('/admin/customers/add', [CustomerController::class, "add"]);
-Route::post('/admin/customers/save', [CustomerController::class,"save"]);
 
 Route::get('/admin/product',[ProductController::class,"getAll"]);
 Route::get('/admin/product/delete/{id}', [ProductController::class, "delete"]);
@@ -55,7 +47,7 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeCart']);
 Route::get('/cart/clear', [CartController::class, 'clearCart']);
 Route::get("/cart/update/{type}/{id}/{quantity}", [CartController::class, "updateCart"]);
 
-Route::get('/checkout', [CartController::class, "checkout"]);
+Route::get('/checkout', [CartController::class, "checkout"])->middleware('auth');
 Route::post('/cart/checkout', [CartController::class, "cartCheckout"]);
 
 Route::get('/admin/order-list', [AdminOrderController::class, "getAll"]);
@@ -65,12 +57,24 @@ Route::get('/admin/order-update-status/{id}/{status}', [AdminOrderController::cl
 Route::get('/products/category/{categoryName}', [ProductShowController::class, 'showByCategory'])->name('category.show');
 
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::middleware([KhachDaDangNhap::class])->group(function(){
-    Route::get('/signup',[CustomerController::class, 'signUp'])->name('user.account.signup');
-    Route::post('/signup',[CustomerController::class,'signupProcess'])->name('user.account.signupProcess');
+Route::get('/sign-in', function () {
+    return view('user.account.signin');
+})->name('login');
 
-    Route::get('/signin',[CustomerController::class,'signIn'])->name('user.account.signin');
-    Route::post('/signin',[CustomerController::class,'signinProcess'])->name('user.account.signinProcess');
+Route::post('/sign-in/post', [AuthController::class, 'sign_in'])->name('user.account.signin');
+
+Route::get('/sign-out', [AuthController::class,'sign_out']);
+
+Route::get('/sign-up', function () {
+    return view('user.account.signup');
 });
+Route::post('/sign-up/post', [AuthController::class, 'sign_up'])->name('user.account.signup');
+
+Route::get('/admin/order-details/{id}', [AdminOrderController::class, 'showdetailsorder']);
+
+Route::get('/order-history', [AdminOrderController::class, 'orderHistory'])->name('orderhistory')->middleware('auth');
+
+Route::get('/order-details/{id}', [AdminOrderController::class, 'showOrderDetails'])->name('order.details')->middleware('auth');
+
+Route::get('/cancel-order/{id}', [AdminOrderController::class, 'cancelOrder'])->name('order.cancel')->middleware('auth');

@@ -25,15 +25,6 @@
         </li>
 
         <li>
-            <a href="/admin/customers">
-                <span class="icon">
-                    <ion-icon name="people-outline"></ion-icon>
-                </span>
-                <span class="title">Khách hàng</span>
-            </a>
-        </li>
-
-        <li>
             <a href="/admin/category">
                 <span class="icon">
                     <ion-icon name="albums-outline"></ion-icon>
@@ -57,15 +48,6 @@
                     <ion-icon name="cart-outline"></ion-icon>
                 </span>
                 <span class="title">Đơn hàng</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <span class="icon">
-                    <ion-icon name="stats-chart-outline"></ion-icon>
-                </span>
-                <span class="title">Thống kê</span>
             </a>
         </li>
     </ul>

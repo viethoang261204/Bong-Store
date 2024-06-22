@@ -8,7 +8,83 @@
     <title>Admin</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
+<style>
+    /* Style for navbar item */
+    .nav-item {
+        position: relative;
+        padding: 10px 15px;
+    }
+
+    /* Styling the dropdown link */
+    .nav-link {
+        color: #fff; /* Adjust color to match your theme */
+        background-color: #007bff; /* Blue background */
+        padding: 10px 20px;
+        border-radius: 5px; /* Rounded corners for the link */
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Space between text and dropdown icon */
+        text-decoration: none;
+        font-size: 16px; /* Larger font size */
+    }
+
+    /* Styling the dropdown menu */
+    .dropdown-menu {
+        position: absolute;
+        top: 100%; /* Position directly below the dropdown link */
+        left: 0;
+        z-index: 1000;
+        display: none; /* Hide by default, shown on click */
+        float: none;
+        min-width: 160px; /* Set a min-width for the dropdown */
+        padding: 5px 0; /* Padding for the dropdown */
+        margin: 2px 0 0; /* Margin top */
+        font-size: 14px; /* Font size for dropdown items */
+        text-align: left;
+        list-style: none;
+        background-color: #f8f9fa; /* Light background for the dropdown */
+        background-clip: padding-box;
+        border: 1px solid rgba(0,0,0,.15); /* Subtle border */
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,.175); /* Shadow for dropdown */
+    }
+
+    /* Dropdown item styling */
+    .dropdown-item {
+        display: block;
+        width: 100%; /* Full width */
+        padding: 8px 20px;
+        clear: both;
+        font-weight: 400;
+        color: #212529; /* Dark text color for readability */
+        text-align: inherit;
+        white-space: nowrap;
+        background: none;
+        border: 0;
+        text-decoration: none;
+    }
+
+    /* Hover effect for dropdown items */
+    .dropdown-item:hover, .dropdown-item:focus {
+        color: #16181b;
+        text-decoration: none;
+        background-color: #f8f9fa; /* Light grey background on hover */
+    }
+
+    /* Show the dropdown menu on hover */
+    .nav-item:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Adding a little arrow icon next to the username */
+    .nav-link::after {
+        content: '\25bc'; /* Downward arrow */
+        font-size: 12px;
+        margin-left: 10px;
+    }
+</style>
 
 <body>
 <div class="container">
@@ -19,219 +95,60 @@
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
 
-            <div class="search">
-                <label>
-                    <input type="text" placeholder="Search here">
-                    <ion-icon name="search-outline"></ion-icon>
-                </label>
-            </div>
-
-            <div class="user">
-                <img src="assets/imgs/customer01.jpg" alt="">
+            <!-- User dropdown menu -->
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    {{ Auth::user()->full_name }}
+                </a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="/sign-out" class="dropdown-item">Logout</a>
+                </div>
             </div>
         </div>
 
         <div class="cardBox">
             <div class="card">
                 <div>
-                    <div class="numbers">1,504</div>
-                    <div class="cardName">Daily Views</div>
+                    <div class="cardName">Products</div>
+                    <div class="numbers">{{ $productCount }}</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="eye-outline"></ion-icon>
+                    <ion-icon name="cube-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="card">
                 <div>
-                    <div class="numbers">80</div>
-                    <div class="cardName">Sales</div>
+                    <div class="cardName">Category</div>
+                    <div class="numbers">{{ $categoryCount }}</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="cart-outline"></ion-icon>
+                    <ion-icon name="list-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="card">
                 <div>
-                    <div class="numbers">284</div>
-                    <div class="cardName">Comments</div>
+                    <div class="cardName">Orders</div>
+                    <div class="numbers">{{ $orderCount }}</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                    <ion-icon name="receipt-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="card">
                 <div>
-                    <div class="numbers">$7,842</div>
                     <div class="cardName">Earning</div>
+                    <div class="numbers">{{ number_format($totalRevenue) }}</div>
                 </div>
 
                 <div class="iconBx">
-                    <ion-icon name="cash-outline"></ion-icon>
+                    <ion-icon name="wallet-outline"></ion-icon>
                 </div>
-            </div>
-        </div>
-
-        <div class="details">
-            <div class="recentOrders">
-                <div class="cardHeader">
-                    <h2>Recent Orders</h2>
-                    <a href="#" class="btn">View All</a>
-                </div>
-
-                <table>
-                    <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Price</td>
-                        <td>Payment</td>
-                        <td>Status</td>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Addidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Star Refrigerator</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Dell Laptop</td>
-                        <td>$110</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Apple Watch</td>
-                        <td>$1200</td>
-                        <td>Paid</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-
-                    <tr>
-                        <td>Adidas Shoes</td>
-                        <td>$620</td>
-                        <td>Due</td>
-                        <td><span class="status inProgress">In Progress</span></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="recentCustomers">
-                <div class="cardHeader">
-                    <h2>Recent Customers</h2>
-                </div>
-
-                <table>
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>David <br> <span>Italy</span></h4>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td width="60px">
-                            <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                        </td>
-                        <td>
-                            <h4>Amit <br> <span>India</span></h4>
-                        </td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>
@@ -243,6 +160,12 @@
 <!-- ====== ionicons ======= -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Optional: Include jQuery and Popper JS for Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

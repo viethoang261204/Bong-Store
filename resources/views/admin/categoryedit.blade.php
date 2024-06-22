@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Chỉnh sửa danh mục</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
@@ -28,8 +28,13 @@
                 </label>
             </div>
 
-            <div class="user">
-                <img src="/assets/imgs/customer01.jpg" alt="">
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    {{ Auth::user()->full_name }}
+                </a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="/sign-out" class="dropdown-item">Logout</a>
+                </div>
             </div>
         </div>
 
@@ -60,6 +65,9 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- SweetAlert for success message -->
 @if(session('success'))
     <script>

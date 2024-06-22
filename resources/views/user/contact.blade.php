@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bong - Contact</title>
+    <title>Contact</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -49,36 +49,6 @@
     </div>
     <div class="row px-xl-5">
         <div class="col-lg-7 mb-5">
-            <div class="contact-form">
-                <div id="success"></div>
-                <form name="sentMessage" id="contactForm" action="{{ route('contact.store') }}" method="POST" novalidate="novalidate">
-                    @csrf
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required="required" data-validation-required-message="Please enter a phone" />
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="control-group">
-                        <textarea class="form-control" rows="6" id="message" name="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                        <p class="help-block text-danger"></p>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send Message</button>
-                    </div>
-                </form>
-                <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
-                    Your message has been sent successfully!
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5 mb-5">
             <div class="d-flex flex-column mb-3">
                 <h5 class="font-weight-semi-bold mb-3">Bống Store</h5>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Ta Quang Buu Street, Hanoi, Vietnam</p>

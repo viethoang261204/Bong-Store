@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -11,32 +12,45 @@ class CartController extends Controller
 {
     public function addToCart($id, $quantity)
     {
-        // Kiểm tra nếu số lượng nhỏ hơn hoặc bằng 0
         if ($quantity <= 0) {
             return redirect('/product-detail/' . $id)->with('error', 'Quantity must be greater than 0.');
         }
 
-        // Lấy sản phẩm từ cơ sở dữ liệu
         $product = DB::table('product')
             ->where('id', $id)
             ->first();
 
-        // Kiểm tra nếu sản phẩm tồn tại và số lượng tồn kho đủ
-        if ($product) {
-            if ($product->stock < $quantity) {
-                return redirect('/product-detail/' . $id)->with('error', 'Not enough stock available.');
-            }
-
-            $product->quantity = $quantity;
-            $cart = $product;
-            // Thêm sản phẩm vào session giỏ hàng
-            Session::push("cart", $cart);
-        } else {
+        if (!$product) {
             return redirect('/product-detail/' . $id)->with('error', 'Product not found.');
         }
 
+        if ($product->stock < $quantity) {
+            return redirect('/product-detail/' . $id)->with('error', 'Not enough stock available.');
+        }
+
+        $cart = Session::get('cart', []);
+
+        // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+        $found = false;
+        foreach ($cart as $index => $item) {
+            if ($item->id == $id) {
+                $cart[$index]->quantity += $quantity;  // Cộng dồn số lượng
+                $found = true;
+                break;
+            }
+        }
+
+        // Nếu sản phẩm chưa có trong giỏ, thêm mới
+        if (!$found) {
+            $product->quantity = $quantity;
+            array_push($cart, $product);
+        }
+
+        Session::put('cart', $cart);
+
         return redirect('/product-detail/' . $id);
     }
+
 
 
 
@@ -114,6 +128,7 @@ class CartController extends Controller
         return view("user/checkout",[
             "cart" => $cart,
             "total" => $total,
+            "user" => Auth::user()
         ]);
     }
 
@@ -125,14 +140,18 @@ class CartController extends Controller
         $address = $request->address;
         $phone = $request->phone;
 
+        // Lấy ID người dùng hiện tại
+        $customerid = Auth::id(); // Auth::id() sẽ trả về ID của người dùng đã đăng nhập
+
         $id = DB::table("orders")
             ->insertGetId([
+                "customerid" => $customerid,
                 "full_name" => $fullName,
                 "address" => $address,
                 "phone" => $phone,
                 "total" => $total,
-                "status" => "PENDING",
-                "created_at" => date("Y-m-d H:i:s"),
+                "status" => $status,
+                "created_at" => Carbon::now(),
             ]);
 
         $cart = Session::get('cart');
@@ -158,8 +177,6 @@ class CartController extends Controller
 
         return view("/user/checkoutsucces", []);
     }
-
-
 
 }
 

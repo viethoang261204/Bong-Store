@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bong- Checkout</title>
+    <title>Checkout</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -54,15 +54,15 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label>Full name</label>
-                        <input class="form-control" type="text" name="fullName" placeholder="Nguyen Van A">
+                        <input class="form-control" type="text" name="fullName" placeholder="Nguyen Van A"  required>
                     </div>
                     <div class="col-md-6 form-group">
                         <label>Address</label>
-                        <input class="form-control" type="text" name="address" placeholder="Ha Noi">
+                        <input class="form-control" type="text" name="address" placeholder="Ha Noi"  required>
                     </div>
                     <div class="col-md-6 form-group">
                         <label>Mobile No</label>
-                        <input class="form-control" type="number" name="phone" placeholder="+123 456 789">
+                        <input class="form-control" type="number" name="phone" placeholder="+123 456 789" required>
                     </div>
                 </div>
             </div>

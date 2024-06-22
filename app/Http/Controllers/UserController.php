@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -40,10 +41,11 @@ class UserController extends Controller
             'full_name' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:255',
+            'role' => 'required|in:customer,admin',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $data = $request->only(['email', 'full_name', 'phone', 'address', 'role', 'status']);
+        $data = $request->only(['email', 'full_name', 'phone', 'address', 'role']);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -76,6 +78,7 @@ class UserController extends Controller
             'full_name' => 'required|string|max:255',
             'phone' => 'required|numeric',
             'address' => 'required|string|max:255',
+            'role' => 'required|in:customer,admin',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'email.required' => 'Email không được để trống',
@@ -87,6 +90,8 @@ class UserController extends Controller
             'phone.required' => 'Số điện thoại không được để trống',
             'phone.numeric' => 'Số điện thoại phải là một số',
             'address.required' => 'Địa chỉ không được để trống',
+            'role.required' => 'Vai trò không được để trống',
+            'role.in' => 'Vai trò không hợp lệ',
             'image.image' => 'File tải lên phải là một hình ảnh',
             'image.max' => 'Hình ảnh không được vượt quá 2MB',
         ]);
@@ -94,10 +99,11 @@ class UserController extends Controller
         try {
             $data = [
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'full_name' => $request->full_name,
                 'phone' => $request->phone,
                 'address' => $request->address,
+                'role' => $request->role,
             ];
 
             if ($request->hasFile('image')) {

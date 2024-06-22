@@ -10,6 +10,7 @@ class ProductController extends Controller
 {
     public function getAll()
     {
+        $user = auth()->user();
         $path = "admin/product";
         $products = DB::table('product')
             ->join('category', 'product.categoryid', '=', 'category.id')
@@ -18,7 +19,8 @@ class ProductController extends Controller
         Paginator::useBootstrap();
         return view("admin.productindex", [
             "path" => $path,
-            "products" => $products
+            "products" => $products,
+            "user" => $user
         ]);
     }
 

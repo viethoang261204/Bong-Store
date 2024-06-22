@@ -1,43 +1,69 @@
 <!DOCTYPE html>
-<!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Popup Login Form Design | CodingNepal</title>
-      <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-   </head>
-   <body>
-      <div class="center">
-         <input type="checkbox" id="show">
-         <label for="show" class="show-btn">View Form</label>
-         <div class="container">
-            <label for="show" class="close-btn fas fa-times" title="close"></label>
-            <div class="text">
-               Login Form
+<head>
+    <meta charset="utf-8">
+    <title>Bống Store Login</title>
+    <link rel="stylesheet" href="/t/css/signin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+<div class="center">
+    <div class="container">
+        <label class="close-btn fas fa-times" title="close" onclick="returnToHome()"></label>
+        <div class="text">Login</div>
+
+        <form method="post" action="{{ route('user.account.signin') }}" enctype="multipart/form-data">
+            @csrf
+
+            <div class="alert-section">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Lỗi!</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('failed'))
+                    <div class="alert alert-danger">
+                        {{ session('failed') }}
+                    </div>
+                @endif
             </div>
-            <form method="post" action="{{route('user.account.signinProcess')}}" enctype="multipart/form-data">
-             @csrf               
-              <div class="data">
-                  <label>Enter your email/label>
-                  <input type="text" id="email" name="email" value="{{old('email')}}" required>
-               </div>
-               <div class="data">
-                  <label>Password</label>
-                  <input type="password" id="password" name="password" value="{{old('password')}}" required>
-               </div>
-               <div class="forgot-pass">
-                  <a href="#">Forgot Password?</a>
-               </div>
-               <div class="btn">
-                  <div class="inner"></div>
-                  <button type="submit">Login</button>
-               </div>
-               <div class="signup-link">
-                  Not a member? <a href="{{route('user.account.signup')}}">Signup now</a>
-               </div>
-            </form>
-         </div>
-      </div>
-   </body>
-</html> 
+
+            <div class="data">
+                <label>Enter your email</label>
+                <input type="text" id="email" name="email" value="{{ old('email') }}" required>
+            </div>
+            <div class="data">
+                <label>Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="btn">
+                <div class="inner"></div>
+                <button type="submit">Login</button>
+            </div>
+
+            <div class="signup-link">
+                Not a member? <a href="/sign-up">Signup now</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function returnToHome() {
+        window.location.href = '/home'; // Chỉnh sửa đường dẫn nếu cần
+    }
+</script>
+</body>
+</html>

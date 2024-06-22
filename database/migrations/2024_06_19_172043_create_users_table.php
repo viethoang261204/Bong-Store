@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('email', 100)->unique('email');
             $table->string('password');
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable()->useCurrent();
+            $table->enum('role', ['customer', 'admin'])->nullable()->default('customer');
             $table->string('image')->nullable();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('users');
     }
 };
